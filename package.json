@@ -1,12 +1,12 @@
 {
   "name": "leaflet.gridheat",
   "version": "1.0.0",
-  "description": "",
+  "description": "A heatmap plugin with data stored in tiles.",
   "main": "src/index.js",
   "scripts": {
     "test": "eslint .",
     "lint": "eslint . --fix",
-    "demo": "webpack-dev-server --open --hot"
+    "demo": "webpack-dev-server --config demo/webpack.config.js --open --hot"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^4.7.1",
@@ -46,6 +48,6 @@
     "dist/"
   ],
   "dependencies": {
-    "simpleheat": "^0.4.0"
+    "leaflet.heat": "^0.2.0"
   }
 }
