@@ -1,5 +1,6 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
 const root = path.resolve(__dirname, '../')
 
 module.exports = {
@@ -31,6 +32,11 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: path.resolve(root, 'node_modules/leaflet/dist/leaflet.css') },
       { from: path.resolve(__dirname, 'index.html') }
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      'process.env': {
+        MAPBOX_TOKEN: JSON.stringify(process.env.MAPBOX_TOKEN)
+      }
+    })
   ]
 }
