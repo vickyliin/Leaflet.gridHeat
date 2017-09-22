@@ -28,3 +28,4 @@ const GridHeat = Super.GridHeat = Super.extend({
 })
 
 L.gridHeat = opt => new GridHeat(opt)
+export { GridHeat as default }

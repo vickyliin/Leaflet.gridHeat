@@ -45,4 +45,5 @@ const AjaxData = Super.AjaxData = Super.extend({
   }
 })
 
+L.ajaxData = opt => new AjaxData(opt)
 export { AjaxData as default }
