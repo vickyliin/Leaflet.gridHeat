@@ -41,7 +41,8 @@
       "standard"
     ],
     "globals": {
-      "L": false
+      "L": false,
+      "API_ENTRY": false
     },
     "env": {
       "browser": true

@@ -35,9 +35,7 @@ module.exports = {
       { from: path.resolve(__dirname, 'index.html') }
     ]),
     new webpack.DefinePlugin({
-      'process.env': {
-        MAPBOX_TOKEN: JSON.stringify(process.env.MAPBOX_TOKEN)
-      }
+      API_ENTRY: JSON.stringify(process.env.API_ENTRY)
     })
   ]
 }
