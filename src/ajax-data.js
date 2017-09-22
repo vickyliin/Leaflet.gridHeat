@@ -1,12 +1,16 @@
 
 import debounce from 'lodash.debounce'
 
-const Super = L.GridLayer
+let Super = L.GridLayer
 const AjaxData = Super.AjaxData = Super.extend({
   _requests: {},
   options: {
     ajax ({ coords, latLngBounds }) { return {} },
-    heatLayer: {}
+    updateInterval: 800
+  },
+  initialize () {
+    Super.prototype.initialize.apply(this, arguments)
+    this._update = debounce(this._update, this.options.updateInterval)
   },
   async createTile (coords) {
     return this.options.ajax({
@@ -34,23 +38,10 @@ const AjaxData = Super.AjaxData = Super.extend({
     done()
     delete this._requests[key]
   },
-  _update: debounce(function () {
+  _update () {
     Super.prototype._update.apply(this, arguments)
-    this._redraw()
+    this.fire('requestsSent', { requests: this._requests, tiles: this._tiles })
     return this
-  }, 500),
-  async _redraw () {
-    let heatLayer = this.options.heatLayer
-    for (let promise of Object.values(this._requests)) {
-      await promise
-    }
-    heatLayer._latlngs = []
-    for (let { el } of Object.values(this._tiles)) {
-      for (let d of el) {
-        heatLayer._latlngs.push(d)
-      }
-    }
-    heatLayer.redraw()
   }
 })
 
