@@ -22,7 +22,8 @@ module.exports = {
   resolve: {
     modules: [
       'node_modules',
-      __dirname
+      __dirname,
+      path.resolve(root, 'src')
     ]
   },
   devServer: {
