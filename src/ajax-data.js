@@ -40,8 +40,13 @@ const AjaxData = Super.AjaxData = Super.extend({
   },
   _update () {
     Super.prototype._update.apply(this, arguments)
-    this.fire('requestsSent', { requests: this._requests, tiles: this._tiles })
+    this.fire('requestsSent', { requests: this._requests })
+    this._waitAndFire(Object.values(this._requests))
     return this
+  },
+  async _waitAndFire (requests) {
+    for (let promise of requests) await promise
+    this.fire('requestsDone', { tiles: Object.values(this._tiles) })
   }
 })
 

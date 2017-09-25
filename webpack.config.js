@@ -1,13 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
 const root = __dirname
+const entry = ['babel-polyfill', 'index.js']
 
 module.exports = {
-  entry: ['babel-polyfill', 'index.js'],
+  entry: {
+    '.js': entry,
+    '.min.js': entry
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
-    filename: 'leaflet.gridHeat.js'
+    filename: 'leaflet.gridHeat[name]'
   },
   module: {
     rules: [
@@ -25,14 +29,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
       minimize: true
     })
   ]
-}
-if (process.env.BUILD === 'min') {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin()
-  )
-  module.exports.output.filename = 'leaflet.gridHeat.min.js'
 }
