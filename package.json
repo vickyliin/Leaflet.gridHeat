@@ -6,7 +6,9 @@
   "scripts": {
     "test": "eslint .",
     "lint": "eslint . --fix",
-    "demo": "webpack-dev-server --config demo/webpack.config.js --open --hot"
+    "demo": "webpack-dev-server --config demo/webpack.config.js --open --hot",
+    "build-min": "cross-env BUILD=min webpack --progress --hide-modules",
+    "build": "webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,10 @@
   "bugs": {
     "url": "https://github.com/vickyliin/Leaflet.gridHeat/issues"
   },
-  "homepage": "https://github.com/vickyliin/Leaflet.gridHeat#readme",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/vickyliin/Leaflet.gridHeat",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -26,6 +31,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.5",
     "eslint": "^4.7.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
