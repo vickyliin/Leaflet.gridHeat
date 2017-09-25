@@ -2,6 +2,12 @@
 
 A heatmap plugin with data stored in tiles to get rid of large amount data transfer. Built on top of [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat).
 
+## Demo
+
+- [Codepen](https://codepen.io/vickyliin/pen/qPqvBd)
+
+  This is a demo of randomly generated data. Data points are generated as tiles loaded, so it is expected for the heatmap changes each time you zoom/move the map.
+
 ## Installation
 
 You can import the script after leaflet in your html file:
@@ -32,12 +38,6 @@ import 'leaflet.gridheat'
 ```javascript
 L.gridHeat(options).addTo(yourMap)
 ```
-
-## Demo
-
-- [Codepen](https://codepen.io/vickyliin/pen/qPqvBd)
-
-  This is a demo of randomly generated data. Data points are generated as tiles loaded, so it is expected for the heatmap changes each time you zoom/move the map.
 
 ## Reference
 
