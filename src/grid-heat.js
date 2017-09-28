@@ -6,7 +6,7 @@ const GridHeat = Super.GridHeat = Super.extend({
   initialize (opt) {
     let { ajax, ...heatLayerOpt } = opt
     let heatLayer = this.heatLayer = L.heatLayer([], heatLayerOpt)
-    let dataLayer = this.dataLayer = new AjaxData({ ajax })
+    let dataLayer = this.dataLayer = new AjaxData(opt)
     dataLayer.on('requestsDone', ({tiles}) => this.redraw(tiles))
     Super.prototype.initialize.call(this, [dataLayer, heatLayer])
   },

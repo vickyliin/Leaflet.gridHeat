@@ -9,7 +9,7 @@ L.tileLayer.wms('https://demo.boundlessgeo.com/geoserver/ows?', {
 let options
 
 if (API_ENTRY) {
-  options = {
+  options = [{
     async ajax ({ latLngBounds, coords }) {
       let xhr = new XMLHttpRequest()
       let data = {
@@ -31,16 +31,14 @@ if (API_ENTRY) {
     },
     radius: 5,
     blur: 8
-  }
+  }]
 } else {
-  options = {
-    ajax ({ latLngBounds }) {
-      return [
-        [latLngBounds.getNorth(), latLngBounds.getWest(), 1]
-      ]
-    },
-    minOpacity: 0.5
-  }
+  options = [
+    'http://your.data.provider/{x}/{y}/{z}',
+    {
+      minOpacity: 0.5
+    }
+  ]
 }
 
-L.gridHeat(options).addTo(map)
+L.gridHeat.apply(this, options).addTo(map)

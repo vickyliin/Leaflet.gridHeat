@@ -5,11 +5,27 @@ let Super = L.GridLayer
 const AjaxData = Super.AjaxData = Super.extend({
   _requests: {},
   options: {
-    ajax ({ coords, latLngBounds }) { return {} },
-    updateInterval: 800
+    async ajax ({ coords, latLngBounds }) {
+      if (!this.url) return {}
+      let xhr = new XMLHttpRequest()
+      let url = L.Util.template(this.url, { ...coords, ...this })
+      xhr.open('get', url)
+      xhr.responseType = this.responseType
+      let promise = new Promise(resolve => { xhr.onload = resolve })
+      xhr.send()
+      await promise
+      return xhr.response
+    },
+    updateInterval: 800,
+    responseType: 'json'
   },
   initialize () {
-    Super.prototype.initialize.apply(this, arguments)
+    let opt = arguments
+    if (typeof opt[0] === 'string') {
+      opt = [{ url: opt[0], ...opt[1] }]
+    }
+    opt = opt[0]
+    Super.prototype.initialize.call(this, { ...this.options, ...opt })
     this._update = debounce(this._update, this.options.updateInterval)
   },
   async createTile (coords) {
