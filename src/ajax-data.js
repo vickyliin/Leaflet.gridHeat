@@ -44,7 +44,9 @@ const AjaxData = Super.AjaxData = Super.extend({
   async _addTile (coords) {
     let key = this._tileCoordsToKey(coords)
     let done
+    if (this._requests[key]) this._requests[key].resolve()
     this._requests[key] = new Promise(resolve => { done = resolve })
+    this._requests[key].resolve = done
     let tile = await this.createTile(this._wrapCoords(coords))
     this._tiles[key] = {
       el: tile,
