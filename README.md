@@ -65,15 +65,19 @@ let options = {
 
 All [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat) options are available.
 
-| Name                   | Type           | Description                                   |
-|------------------------|----------------|-----------------------------------------------|
-| options.updateInterval | Number         | Debounce time of update in ms.                |
-| options.responseType   | String         | Ajax response type when using `url`.          |
-| options.ajax           | Function       | A function to load tile data from server.     |
+| Name                   | Type           | Default | Description                                   |
+|------------------------|----------------|---------|-----------------------------------------------|
+| options.updateInterval | Number         | 800     | Debounce time of update in ms.                |
+| options.responseType   | String         | json    | Ajax response type when using `url`.          |
+| options.ajax           | Function       | ...     | A function to load tile data from server.     |
 
 #### options.ajax
 
 A function to load tile data from server.
+
+##### default
+
+A function that gets data from `url`.
 
 ##### ajax(params)
 
