@@ -1,6 +1,6 @@
 {
   "name": "leaflet.gridheat",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A heatmap plugin with data stored in tiles.",
   "main": "dist/leaflet.gridHeat.min.js",
   "scripts": {
