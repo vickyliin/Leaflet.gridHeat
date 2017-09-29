@@ -39,11 +39,37 @@ import 'leaflet.gridheat'
 L.gridHeat(options).addTo(yourMap)
 ```
 
+or use url template just as tile layers:
+```javascript
+let url = 'http://your.data.provider/{x}/{y}/{z}'
+L.gridHeat(url, options).addTo(yourMap)
+```
+
 ## Reference
+
+### url
+
+Data in `options` and `x`, `y`, `z` of tile's xyz-coordinate would be passed to url template, eg.
+
+```javascript
+let url = 'http://your.data.provider/{x}/{y}/{z}?{someParamKey}={itsValue}'
+let options = {
+  someParamKey: 'key',
+  itsValue: 'value'
+}
+// the url generated would be like:
+// http://your.data.provider/229/101/8?key=value
+```
 
 ### options
 
 All [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat) options are available.
+
+| Name                   | Type           | Description                                   |
+|------------------------|----------------|-----------------------------------------------|
+| options.updateInterval | Number         | Debounce time of update in ms.                |
+| options.responseType   | String         | Ajax response type when using `url`.          |
+| options.ajax           | Function       | A function to load tile data from server.     |
 
 #### options.ajax
 
@@ -60,3 +86,14 @@ A function to load tile data from server.
 
 List of **latLngs** to show **or** a promise resolving latLngs.  
 For the format of latLngs, please refer to [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat).
+
+### GridHeat
+
+`L.gridHeat` is just an alias of `new L.LayerGroup.GridHeat`, which is an extension of `L.LayerGroup`:
+
+| Name                | Type                 | Description                                                     |
+|---------------------|----------------------|-----------------------------------------------------------------|
+| gridHeat.heatLayer  | L.HeatLayer          | The heat layer displaying data.                                 |
+| gridHeat.dataLayer  | L.GridLayer.AjaxData | A layer with data stored in tiles, extended from `L.GridLayer`. |
+
+One can accesses and manipulates the layers directly by these APIs.
